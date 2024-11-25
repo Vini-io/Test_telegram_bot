@@ -7,7 +7,6 @@ app.use(express.json())
 
 // Função para criar um bot
 let bots = []
-if(bots)
 
 
 function createBot(token, welcomeMessage) {
