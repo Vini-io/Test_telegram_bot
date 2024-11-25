@@ -77,7 +77,7 @@ app.listen(3000, () => {
 
 const express = require('express');
 const { Telegraf } = require('telegraf');
-
+require('dotenv').config();
 const app = express();
 app.use(express.json());
 
@@ -126,7 +126,7 @@ function SearchBot(token) {
 app.post("/bot", (req, res) => {
     const { text } = req.body;
     const token = "8144116187:AAHliMicOx90JBD8TO3DsbseZRuQr_XmLC8"; // Substitua pelo seu token
-    const webhookUrl = "https://42d4-2804-d59-7f31-e600-5dbc-2660-c025-1f3e.ngrok-free.app"; // Substitua pelo URL da Vercel
+    const webhookUrl = process.env.URL; // Substitua pelo URL da Vercel
 
     const existingBot = SearchBot(token);
 
