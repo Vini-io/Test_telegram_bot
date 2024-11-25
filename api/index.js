@@ -30,9 +30,13 @@ function SearchBot(token) {
     return;
 }
 
-app.post("/bot", (req, res) => {
-    const { token, text } = req.body
+app.get("/", (req, res)=>{
+    res.send("Hello word")
+})
 
+app.post("/bot", (req, res) => {
+    const { text } = req.body
+    const token = "8144116187:AAHliMicOx90JBD8TO3DsbseZRuQr_XmLC8"
     const bot = SearchBot(token)
     if (!bot) {
         bots.push({
