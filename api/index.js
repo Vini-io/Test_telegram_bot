@@ -125,7 +125,7 @@ function SearchBot(token) {
 // Endpoint para criar ou atualizar um bot
 app.post("/bot", (req, res) => {
     const { text } = req.body;
-    const token = "8144116187:AAHliMicOx90JBD8TO3DsbseZRuQr_XmLC8"; // Substitua pelo seu token
+    const token = process.env.tokenBot // Substitua pelo seu token
     const webhookUrl = process.env.URL; // Substitua pelo URL da Vercel
 
     const existingBot = SearchBot(token);
