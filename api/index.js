@@ -1,79 +1,3 @@
-/*
-const express = require('express')
-const { Telegraf } = require('telegraf');
-
-const app = express();
-
-app.use(express.json())
-
-
-let bots = []
-
-
-function createBot(token, welcomeMessage) {
-    const bot = new Telegraf(token);
-    bot.start((ctx) => ctx.reply(welcomeMessage));
-    bot.on('text', (ctx) => {
-        ctx.reply(welcomeMessage);
-    });
-    bot.launch();
-    
-    return bot;
-}
-
-
-
-
-
-function SearchBot(token) {
-    for (let i in bots) {
-        if (bots[i].token == token) {
-            return bots[i]
-        }
-    }
-    return;
-}
-
-app.get("/", (req, res)=>{
-    res.json(bots)
-})
-
-app.post("/bot", (req, res) => {
-    const { text } = req.body
-    const token = "8144116187:AAHliMicOx90JBD8TO3DsbseZRuQr_XmLC8"
-    const bot = SearchBot(token)
-    console.log(bot)
-    if (!bot) {
-        bots.push({
-            index: bots.length,
-            token,
-            bot: createBot(token, text)
-        })
-        console.log("create ok")
-    } else {
-        const stopBot = bot.bot
-        stopBot.stop()
-        bots[bot.index] = {
-            index: bot.index,
-            token,
-            bot: createBot(token, text)
-        }
-        console.log("update ok")
-    }
-
-    
-    res.send()
-})
-
-
-app.listen(3000, () => {
-    console.log("rodando")
-})
-
-
-*/
-
-
 
 const express = require('express');
 const { Telegraf } = require('telegraf');
@@ -87,10 +11,6 @@ let bots = [];
 app.get("/", (req, res) => {
     res.json(bots)
 });
-
-
-
-
 
 function createBot(token, text, webhookUrl) {
     try {
@@ -108,19 +28,9 @@ function createBot(token, text, webhookUrl) {
 
 }
 
-
-
-
-
-
-
-
 function SearchBot(token) {
-    return bots.find(bot => bot.token === token);
+    return bots.find(bot => bot.token == token);
 }
-
-
-
 
 // Endpoint para criar ou atualizar um bot
 app.post("/bot", (req, res) => {
@@ -160,11 +70,6 @@ app.post("/bot", (req, res) => {
     res.status(200).json({ message: "Bot configurado com webhook" });
 });
 
-
-
-
-
-
 // Endpoint para processar atualizações do Telegram via webhook
 app.post("/bot/:token", (req, res) => {
     const { token } = req.params;
@@ -177,15 +82,7 @@ app.post("/bot/:token", (req, res) => {
     res.status(200).send("OK");
 });
 
-
-
-
-
 // Inicializa o servidor
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Servidor rodando");
 });
-
-
-
-
