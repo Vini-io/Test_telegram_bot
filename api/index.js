@@ -21,6 +21,7 @@ function createBot(token, text, webhookUrl) {
             ctx.reply(text);
         });
         bot.telegram.setWebhook(`${webhookUrl}/bot/${token}`);
+        console.log(bot)
         return bot;
     } catch (error) {
         console.log("Erro ao criar bot: ", error)
@@ -35,8 +36,8 @@ function SearchBot(token) {
 // Endpoint para criar ou atualizar um bot
 app.post("/bot", (req, res) => {
     const { text } = req.body;
-    const token = process.env.tokenBot // Substitua pelo seu token
-    const webhookUrl = process.env.URL; // Substitua pelo URL da Vercel
+    const token = process.env.tokenBot
+    const webhookUrl = process.env.URL;
 
     const existingBot = SearchBot(token);
 
@@ -48,6 +49,7 @@ app.post("/bot", (req, res) => {
                 token,
                 bot
             });
+            // console.log(bots)
             console.log("Bot criado com webhook");
         } catch (error) {
             console.log("Não foi possivel criar o bot: ", error)
@@ -83,6 +85,7 @@ app.post("/bot/:token", (req, res) => {
 });
 
 // Inicializa o servidor
-app.listen(process.env.PORT, () => {
-    console.log("Servidor rodando");
+const PORT = process.env.PORT
+app.listen(PORT, () => {
+    console.log("Servidor rodando na porta:", PORT);
 });
