@@ -74,7 +74,7 @@ app.post("/bot", (req, res) => {
 app.post("/bot/:token", (req, res) => {
     const { token } = req.params;
     const bot = SearchBot(token);
-
+    console.log(bot)
     if (!bot) {
         return res.status(404).json({ error: "Bot não encontrado" });
     }
