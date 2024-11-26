@@ -37,7 +37,7 @@ function SearchBot(token) {
 app.post("/bot", (req, res) => {
     const { text } = req.body;
     const token = process.env.tokenBot
-    const webhookUrl = "https://test-telegram-bot-ye64.onrender.com";
+    const webhookUrl = process.env.URL;
 
     const existingBot = SearchBot(token);
 
